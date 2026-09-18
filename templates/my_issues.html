@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}My Complaints | CivicLens{% endblock %}
+{% block content %}
+<div class="page-heading mb-4"><p class="eyebrow">YOUR REPORTS</p><h1>My complaints</h1><p class="text-muted">Every issue below belongs to your CivicLens account.</p></div>
+<div class="filter-bar mb-4" role="group" aria-label="Filter complaints by status">{% for item in ['All'] + statuses %}<a class="filter-pill {% if selected_status == item %}active{% endif %}" href="{{ url_for('dashboard.my_issues', status=item) }}">{{ item }}</a>{% endfor %}</div>
+{% if issues %}<div class="row g-3">{% for issue in issues %}<div class="col-12 col-lg-6"><article class="complaint-card"><div class="d-flex justify-content-between gap-3"><span class="issue-id">#{{ issue.id }}</span><span class="status status-{{ issue.status|lower|replace(' ', '-') }}">{{ issue.status }}</span></div><h2>{{ issue.category }}</h2><p>{{ issue.description|truncate(150) }}</p><div class="d-flex justify-content-between align-items-center"><small class="text-muted">Submitted {{ issue.created_at.strftime('%d %b %Y') if issue.created_at else 'Date unavailable' }}<br>Updated {{ issue.updated_at.strftime('%d %b %Y') if issue.updated_at else 'Not available' }}</small><a class="btn btn-outline-primary btn-sm" href="{{ url_for('dashboard.issue_details', issue_id=issue.id) }}">View details</a></div></article></div>{% endfor %}</div>{% else %}<div class="empty-state"><h2>No complaints found</h2><p>There are no reports matching this filter.</p></div>{% endif %}
+{% endblock %}
