@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, render_template
 
-from config import DEBUG, SECRET_KEY
+from config import DATABASE_URL, DEBUG, SECRET_KEY
 from dashboard import dashboard_bp
 from db import close_db
 from routes import register_blueprints
@@ -13,10 +13,12 @@ def create_app(test_config=None):
 	app.config.from_mapping(
 		SECRET_KEY=SECRET_KEY,
 		DEBUG=DEBUG,
-		DB_HOST=os.getenv("DB_HOST", "127.0.0.1"),
-		DB_USER=os.getenv("DB_USER", "root"),
-		DB_PASSWORD=os.getenv("DB_PASSWORD", ""),
-		DB_NAME=os.getenv("DB_NAME", "civiclens"),
+		DATABASE_URL=DATABASE_URL,
+		DB_HOST=os.getenv("DB_HOST"),
+		DB_PORT=os.getenv("DB_PORT"),
+		DB_USER=os.getenv("DB_USER"),
+		DB_PASSWORD=os.getenv("DB_PASSWORD"),
+		DB_NAME=os.getenv("DB_NAME"),
 		UPLOAD_FOLDER=os.path.join(os.path.dirname(__file__), "uploads"),
 	)
 	if test_config:

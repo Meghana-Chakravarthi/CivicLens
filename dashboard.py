@@ -6,7 +6,14 @@ import db
 
 
 dashboard_bp = Blueprint("dashboard", __name__)
-VALID_STATUSES = ("Pending", "In Progress", "Resolved", "Rejected")
+VALID_STATUSES = (
+    "Reported",
+    "Under Review",
+    "Pending",
+    "In Progress",
+    "Resolved",
+    "Rejected",
+)
 
 
 def citizen_required(view):
@@ -31,9 +38,13 @@ def fetch_issue_rows(cursor, query, params=()):
     try:
         cursor.execute(query, params)
     except Exception as error:
-        if "updated_at" not in str(error).lower():
+        error_text = str(error).lower()
+        if "updated_at" not in error_text and "image_url" not in error_text:
             raise
-        cursor.execute(query.replace(", updated_at", ", created_at AS updated_at"), params)
+        fallback_query = query.replace(
+            ", updated_at", ", created_at AS updated_at"
+        ).replace("image_url AS image", "image")
+        cursor.execute(fallback_query, params)
     return cursor.fetchall()
 
 
@@ -48,7 +59,7 @@ def dashboard():
             cursor,
             """
             SELECT COUNT(*) AS total,
-                   COALESCE(SUM(status = 'Pending'), 0) AS pending,
+                   COALESCE(SUM(status IN ('Pending', 'Reported', 'Under Review')), 0) AS pending,
                    COALESCE(SUM(status = 'In Progress'), 0) AS in_progress,
                    COALESCE(SUM(status = 'Resolved'), 0) AS resolved
             FROM issues
@@ -59,7 +70,7 @@ def dashboard():
         recent_issues = fetch_issue_rows(
             cursor,
             """
-            SELECT id, category, description, status, created_at, updated_at
+            SELECT id, category, description, image_url AS image, status, created_at, updated_at
             FROM issues
             WHERE user_id = %s
             ORDER BY created_at DESC
@@ -84,7 +95,7 @@ def my_issues():
         connection = db.get_db()
         cursor = connection.cursor(dictionary=True)
         query = """
-            SELECT id, category, description, status, created_at, updated_at
+            SELECT id, category, description, image_url AS image, status, created_at, updated_at
             FROM issues
             WHERE user_id = %s
         """
@@ -131,11 +142,17 @@ def issue_image(issue_id):
     try:
         connection = db.get_db()
         cursor = connection.cursor(dictionary=True)
-        issue = fetch_one(
-            cursor,
-            "SELECT image FROM issues WHERE id = %s AND user_id = %s",
-            (issue_id, session["user_id"]),
-        )
+        image_query = "SELECT image_url AS image FROM issues WHERE id = %s AND user_id = %s"
+        try:
+            issue = fetch_one(cursor, image_query, (issue_id, session["user_id"]))
+        except Exception as error:
+            if "image_url" not in str(error).lower():
+                raise
+            issue = fetch_one(
+                cursor,
+                image_query.replace("image_url AS image", "image"),
+                (issue_id, session["user_id"]),
+            )
         if not issue or not issue.get("image"):
             return "Image not found.", 404
         return send_from_directory(current_app.config["UPLOAD_FOLDER"], issue["image"])
