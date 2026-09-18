@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | CivicLens{% endblock %}
+{% block content %}
+<div class="page-heading d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+  <div><p class="eyebrow">CITIZEN PORTAL</p><h1>Your CivicLens dashboard</h1><p class="text-muted mb-0">Track the progress of the issues you have reported.</p></div>
+  <a class="btn btn-primary" href="/citizen/report">Report an issue</a>
+</div>
+<div class="row g-3 mb-5">
+  {% for label, key, style in [('Total complaints', 'total', 'total'), ('Pending', 'pending', 'pending'), ('In progress', 'in_progress', 'progress'), ('Resolved', 'resolved', 'resolved')] %}
+  <div class="col-6 col-xl-3"><div class="stat-card {{ style }}"><span>{{ label }}</span><strong>{{ summary.get(key, 0) or 0 }}</strong></div></div>
+  {% endfor %}
+</div>
+<div class="section-heading d-flex justify-content-between align-items-center mb-3"><h2>Recent complaints</h2><a href="{{ url_for('dashboard.my_issues') }}">View all</a></div>
+{% if recent_issues %}
+<div class="list-group complaint-list">
+  {% for issue in recent_issues %}<a class="list-group-item list-group-item-action" href="{{ url_for('dashboard.issue_details', issue_id=issue.id) }}"><div><span class="issue-id">#{{ issue.id }}</span><h3>{{ issue.category }}</h3><p>{{ issue.description|truncate(100) }}</p></div><div class="text-end"><span class="status status-{{ issue.status|lower|replace(' ', '-') }}">{{ issue.status }}</span><small>Submitted {{ issue.created_at.strftime('%d %b %Y') if issue.created_at else 'Date unavailable' }}</small><small>Updated {{ issue.updated_at.strftime('%d %b %Y') if issue.updated_at else 'Not available' }}</small></div></a>{% endfor %}
+</div>
+{% else %}<div class="empty-state"><h3>No complaints yet</h3><p>Your submitted civic issues will appear here.</p><a class="btn btn-primary" href="/citizen/report">Report your first issue</a></div>{% endif %}
+{% endblock %}
