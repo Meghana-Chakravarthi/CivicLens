@@ -61,7 +61,7 @@ def login(client, user_id=7, role="citizen"):
 def test_dashboard_requires_login(client):
     response = client.get("/dashboard")
     assert response.status_code == 302
-    assert "/login" in response.location
+    assert "/auth/login" in response.location
 
 
 def test_non_citizen_access_is_rejected(client):

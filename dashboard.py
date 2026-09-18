@@ -14,7 +14,7 @@ def citizen_required(view):
     def wrapped(*args, **kwargs):
         if not session.get("user_id"):
             next_url = request.full_path.rstrip("?")
-            return redirect(f"/login?next={next_url}")
+            return redirect(f"/auth/login?next={next_url}")
         if session.get("role") != "citizen":
             return "Citizen access required.", 403
         return view(*args, **kwargs)
