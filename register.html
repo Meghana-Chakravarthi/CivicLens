@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CivicLens - Create Account</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <!-- LEFT SIDE -->
+        <div class="brand-section">
+
+            <div class="brand-content">
+
+                <div class="brand-logo">
+                    <span class="logo-icon">●</span>
+                    CivicLens
+                </div>
+
+                <h1>
+                    Take a photo.<br>
+                    Improve your city.
+                </h1>
+
+                <p>
+                    Report civic issues easily and help make
+                    your community cleaner, safer and better.
+                </p>
+
+                <div class="features">
+
+                    <div class="feature">
+                        <span>✓</span>
+                        <div>
+                            <strong>Report Issues</strong>
+                            <small>Report potholes, garbage and more.</small>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <span>✓</span>
+                        <div>
+                            <strong>Track Complaints</strong>
+                            <small>Know the latest status of your report.</small>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <span>✓</span>
+                        <div>
+                            <strong>Improve Your City</strong>
+                            <small>Be part of a better community.</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+        <div class="form-section">
+
+            <div class="form-wrapper">
+
+                <div class="mobile-logo">
+                    CivicLens
+                </div>
+
+                <div class="form-heading">
+
+                    <h2>Create your account</h2>
+
+                    <p>
+                        Join CivicLens and start reporting civic issues.
+                    </p>
+
+                </div>
+
+
+                <form id="registerForm">
+
+                    <!-- FULL NAME -->
+                    <div class="input-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL / PHONE -->
+                    <div class="input-group">
+
+                        <label for="contact">
+                            Email / Phone Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="contact"
+                            placeholder="Enter your email or phone number"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+                    <div class="input-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create a password"
+                            required
+                        >
+
+                        <small class="input-help">
+                            Password must contain at least 6 characters.
+                        </small>
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+                    <div class="input-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Re-enter your password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+                    <p id="registerMessage"></p>
+
+
+                    <!-- REGISTER BUTTON -->
+                    <button
+                        type="submit"
+                        class="btn">
+                        Create Account
+                    </button>
+
+
+                    <!-- LOGIN -->
+                    <p class="account-text">
+
+                        Already have an account?
+
+                        <a href="login.html">
+                            Login
+                        </a>
+
+                    </p>
+
+                </form>
+
+
+                <p class="footer-text">
+                    © 2026 CivicLens. Building better communities together.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

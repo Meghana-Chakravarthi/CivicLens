@@ -1,0 +1,881 @@
+/* =========================================
+   CIVICLENS - REPORT ISSUE PAGE
+   ========================================= */
+
+
+/* =========================================
+   BASIC RESET
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f5f7f6;
+
+    color: #20272e;
+}
+
+
+/* =========================================
+   SIDEBAR
+   ========================================= */
+
+.sidebar {
+
+    width: 250px;
+
+    min-height: 100vh;
+
+    background: #ffffff;
+
+    border-right: 1px solid #e3e8e5;
+
+    position: fixed;
+
+    left: 0;
+
+    top: 0;
+
+    bottom: 0;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* LOGO */
+
+.logo {
+
+    height: 80px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 23px;
+
+    gap: 9px;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    color: #176b4d;
+
+    border-bottom: 1px solid #edf0ef;
+}
+
+
+.logo-circle {
+
+    width: 31px;
+
+    height: 31px;
+
+    border-radius: 50%;
+
+    background: #176b4d;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 11px;
+}
+
+
+/* NAVIGATION */
+
+.navigation {
+
+    padding: 30px 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.nav-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 14px 18px;
+
+    color: #53606b;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    border-radius: 7px;
+
+    transition: 0.2s;
+}
+
+
+.nav-icon {
+
+    width: 20px;
+
+    text-align: center;
+
+    font-size: 17px;
+}
+
+
+.nav-item:hover {
+
+    background: #eef6f2;
+
+    color: #176b4d;
+}
+
+
+.nav-item.active {
+
+    background: #e5f2ec;
+
+    color: #176b4d;
+
+    font-weight: bold;
+}
+
+
+/* LOGOUT */
+
+.sidebar-bottom {
+
+    margin-top: auto;
+
+    padding: 20px 10px;
+
+    border-top: 1px solid #edf0ef;
+}
+
+
+.logout-button {
+
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    text-align: left;
+
+    padding: 14px 18px;
+
+    border-radius: 7px;
+
+    color: #53606b;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+.logout-button:hover {
+
+    background: #f6f6f6;
+
+    color: #c0392b;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+   ========================================= */
+
+.main-content {
+
+    margin-left: 250px;
+
+    padding: 45px 50px;
+
+    max-width: 1250px;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.page-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 32px;
+}
+
+
+.page-label {
+
+    color: #176b4d;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    margin: 0 0 9px;
+}
+
+
+.page-header h1 {
+
+    margin: 0 0 8px;
+
+    font-size: 32px;
+
+    color: #20272e;
+}
+
+
+.page-description {
+
+    margin: 0;
+
+    color: #737d85;
+
+    font-size: 14px;
+}
+
+
+.profile-circle {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+    background: #176b4d;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   FORM CONTAINER
+   ========================================= */
+
+.form-container {
+
+    background: #ffffff;
+
+    border: 1px solid #e1e7e4;
+
+    border-radius: 12px;
+
+    padding: 35px 40px;
+
+    max-width: 900px;
+}
+
+
+.form-group {
+
+    margin-bottom: 27px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    color: #27313a;
+
+    margin-bottom: 9px;
+}
+
+
+.form-group label span {
+
+    color: #d64545;
+}
+
+
+/* =========================================
+   INPUTS
+   ========================================= */
+
+input[type="text"],
+select,
+textarea {
+
+    width: 100%;
+
+    border: 1px solid #cfd7d3;
+
+    border-radius: 7px;
+
+    padding: 13px 14px;
+
+    font-size: 14px;
+
+    font-family: inherit;
+
+    color: #303940;
+
+    background: #ffffff;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+
+    border-color: #176b4d;
+
+    box-shadow:
+        0 0 0 3px rgba(23, 107, 77, 0.08);
+}
+
+
+select {
+
+    cursor: pointer;
+
+    height: 48px;
+}
+
+
+textarea {
+
+    resize: vertical;
+
+    min-height: 130px;
+
+    line-height: 1.6;
+}
+
+
+textarea::placeholder,
+input::placeholder {
+
+    color: #9aa3aa;
+}
+
+
+/* CHARACTER COUNT */
+
+.character-count {
+
+    text-align: right;
+
+    margin-top: 6px;
+
+    color: #89929a;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   PHOTO UPLOAD
+   ========================================= */
+
+.upload-area {
+
+    border: 2px dashed #cbd7d1;
+
+    border-radius: 9px;
+
+    min-height: 210px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 25px;
+
+    background: #fbfcfc;
+
+    transition: 0.2s;
+}
+
+
+.upload-area:hover {
+
+    border-color: #176b4d;
+
+    background: #f7fbf9;
+}
+
+
+.upload-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 50%;
+
+    background: #e9f4ef;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 24px;
+
+    margin-bottom: 12px;
+}
+
+
+.upload-area h3 {
+
+    margin: 0 0 7px;
+
+    font-size: 15px;
+
+    color: #27313a;
+}
+
+
+.upload-area p {
+
+    margin: 0 0 15px;
+
+    color: #8a949b;
+
+    font-size: 12px;
+}
+
+
+.choose-file {
+
+    display: inline-block;
+
+    padding: 9px 17px;
+
+    background: #176b4d;
+
+    color: white !important;
+
+    border-radius: 6px;
+
+    font-size: 12px !important;
+
+    font-weight: bold !important;
+
+    cursor: pointer;
+}
+
+
+.choose-file:hover {
+
+    background: #125b40;
+}
+
+
+#issuePhoto {
+
+    display: none;
+}
+
+
+/* =========================================
+   IMAGE PREVIEW
+   ========================================= */
+
+.image-preview {
+
+    display: none;
+
+    margin-top: 15px;
+
+    position: relative;
+
+    width: 180px;
+}
+
+
+.image-preview img {
+
+    width: 180px;
+
+    height: 130px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+
+    border: 1px solid #d9dfdc;
+}
+
+
+/* =========================================
+   LOCATION
+   ========================================= */
+
+.location-row {
+
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.location-row input {
+
+    flex: 1;
+}
+
+
+.location-button {
+
+    border: 1px solid #176b4d;
+
+    background: #ffffff;
+
+    color: #176b4d;
+
+    padding: 0 17px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+
+.location-button:hover {
+
+    background: #eaf4ef;
+}
+
+
+.location-message {
+
+    margin: 7px 0 0;
+
+    font-size: 12px;
+
+    color: #176b4d;
+}
+
+
+/* =========================================
+   NOTICE
+   ========================================= */
+
+.notice {
+
+    display: flex;
+
+    gap: 13px;
+
+    padding: 16px;
+
+    background: #f1f8f4;
+
+    border: 1px solid #dcece4;
+
+    border-radius: 8px;
+
+    margin-bottom: 28px;
+}
+
+
+.notice-icon {
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: #176b4d;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+.notice strong {
+
+    display: block;
+
+    color: #176b4d;
+
+    font-size: 13px;
+
+    margin-bottom: 4px;
+}
+
+
+.notice p {
+
+    margin: 0;
+
+    color: #64736b;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.form-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.cancel-button {
+
+    padding: 12px 24px;
+
+    border: 1px solid #cbd3cf;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    color: #59636b;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    background: white;
+}
+
+
+.cancel-button:hover {
+
+    background: #f5f6f6;
+}
+
+
+.submit-button {
+
+    padding: 13px 28px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #176b4d;
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.submit-button:hover {
+
+    background: #125b40;
+}
+
+
+/* =========================================
+   MESSAGE
+   ========================================= */
+
+.report-message {
+
+    text-align: center;
+
+    font-size: 13px;
+
+    margin: 18px 0 0;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 800px) {
+
+    .sidebar {
+
+        width: 70px;
+    }
+
+
+    .logo {
+
+        justify-content: center;
+
+        padding: 0;
+
+        font-size: 0;
+    }
+
+
+    .logo-circle {
+
+        margin: 0;
+    }
+
+
+    .nav-item {
+
+        justify-content: center;
+
+        padding: 14px 5px;
+
+        font-size: 0;
+    }
+
+
+    .nav-icon {
+
+        font-size: 17px;
+    }
+
+
+    .logout-button {
+
+        text-align: center;
+
+        font-size: 0;
+
+        padding: 14px 5px;
+    }
+
+
+    .main-content {
+
+        margin-left: 70px;
+
+        padding: 30px 20px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .page-header h1 {
+
+        font-size: 25px;
+    }
+
+
+    .form-container {
+
+        padding: 25px 20px;
+    }
+
+
+    .location-row {
+
+        flex-direction: column;
+    }
+
+
+    .location-button {
+
+        height: 45px;
+    }
+
+
+    .form-actions {
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+
+    .cancel-button,
+    .submit-button {
+
+        text-align: center;
+
+        width: 100%;
+    }
+
+}

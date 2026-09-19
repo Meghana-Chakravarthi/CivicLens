@@ -1,0 +1,534 @@
+/* =========================================
+   CIVICLENS AUTHENTICATION DESIGN
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    min-height: 100vh;
+
+    background: #f5f7f6;
+
+    color: #222;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+   ========================================= */
+
+.auth-container {
+
+    min-height: 100vh;
+
+    display: flex;
+}
+
+
+/* =========================================
+   LEFT BRAND SECTION
+   ========================================= */
+
+.brand-section {
+
+    width: 45%;
+
+    background: #0f100f;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 60px;
+}
+
+
+.brand-content {
+
+    max-width: 500px;
+
+    width: 100%;
+}
+
+
+/* LOGO */
+
+.brand-logo {
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 70px;
+}
+
+
+.logo-icon {
+
+    display: inline-flex;
+
+    width: 35px;
+
+    height: 35px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: #101010;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 15px;
+
+    margin-right: 8px;
+}
+
+
+/* HEADING */
+
+.brand-content h1 {
+
+    font-size: 46px;
+
+    line-height: 1.15;
+
+    margin-bottom: 25px;
+
+    letter-spacing: -1px;
+}
+
+
+.brand-content > p {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    opacity: 0.9;
+
+    max-width: 450px;
+
+    margin-bottom: 45px;
+}
+
+
+/* =========================================
+   FEATURES
+   ========================================= */
+
+.features {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+}
+
+
+.feature {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+}
+
+
+.feature > span {
+
+    width: 28px;
+
+    height: 28px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.2);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 14px;
+
+    flex-shrink: 0;
+}
+
+
+.feature strong {
+
+    display: block;
+
+    font-size: 16px;
+
+    margin-bottom: 5px;
+}
+
+
+.feature small {
+
+    display: block;
+
+    font-size: 14px;
+
+    opacity: 0.8;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   RIGHT FORM SECTION
+   ========================================= */
+
+.form-section {
+
+    width: 55%;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 50px;
+}
+
+
+.form-wrapper {
+
+    width: 100%;
+
+    max-width: 500px;
+}
+
+
+/* =========================================
+   FORM HEADING
+   ========================================= */
+
+.form-heading {
+
+    margin-bottom: 35px;
+}
+
+
+.form-heading h2 {
+
+    font-size: 32px;
+
+    color: #1f2933;
+
+    margin-bottom: 10px;
+}
+
+
+.form-heading p {
+
+    color: #6b7280;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* MOBILE LOGO */
+
+.mobile-logo {
+
+    display: none;
+
+    color: #111111;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    margin-bottom: 40px;
+}
+
+
+/* =========================================
+   INPUTS
+   ========================================= */
+
+.input-group {
+
+    margin-bottom: 23px;
+}
+
+
+.input-group label {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #374151;
+
+    margin-bottom: 9px;
+}
+
+
+.input-group input {
+
+    width: 100%;
+
+    height: 52px;
+
+    padding: 0 15px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    background: white;
+
+    color: #222;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: all 0.2s ease;
+}
+
+
+.input-group input::placeholder {
+
+    color: #9ca3af;
+}
+
+
+.input-group input:focus {
+
+    border-color: #111212;
+
+    box-shadow: 0 0 0 3px rgba(23, 107, 77, 0.10);
+}
+
+
+.input-help {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color: #8a8f98;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   MESSAGE
+   ========================================= */
+
+#registerMessage,
+#loginMessage {
+
+    min-height: 20px;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================
+   BUTTON
+   ========================================= */
+
+.btn {
+
+    width: 100%;
+
+    height: 52px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #030303;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+.btn:hover {
+
+    background: #0d0e0e;
+
+    transform: translateY(-1px);
+}
+
+
+.btn:active {
+
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   ACCOUNT TEXT
+   ========================================= */
+
+.account-text {
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+.account-text a {
+
+    color: #121313;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    margin-left: 4px;
+}
+
+
+.account-text a:hover {
+
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.footer-text {
+
+    text-align: center;
+
+    margin-top: 45px;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .brand-section {
+
+        width: 40%;
+
+        padding: 35px;
+    }
+
+
+    .form-section {
+
+        width: 60%;
+
+        padding: 35px;
+    }
+
+
+    .brand-content h1 {
+
+        font-size: 36px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .auth-container {
+
+        display: block;
+    }
+
+
+    .brand-section {
+
+        display: none;
+    }
+
+
+    .form-section {
+
+        width: 100%;
+
+        min-height: 100vh;
+
+        padding: 35px 25px;
+
+        align-items: flex-start;
+    }
+
+
+    .form-wrapper {
+
+        max-width: 500px;
+
+        margin: auto;
+    }
+
+
+    .mobile-logo {
+
+        display: block;
+    }
+
+
+    .form-heading h2 {
+
+        font-size: 28px;
+    }
+
+}
+.dashboard-body {
+    background: lightblue !important;
+}

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CivicLens - Report Issue</title>
+
+    <link rel="stylesheet" href="report.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- ================================
+         SIDEBAR
+         ================================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <span class="logo-circle">●</span>
+
+            <span>CivicLens</span>
+
+        </div>
+
+
+        <nav class="navigation">
+
+            <a href="dashboard.html" class="nav-item">
+
+                <span class="nav-icon">⌂</span>
+
+                Dashboard
+
+            </a>
+
+
+            <a href="report.html" class="nav-item active">
+
+                <span class="nav-icon">+</span>
+
+                Report Issue
+
+            </a>
+
+
+            <a href="#" class="nav-item">
+
+                <span class="nav-icon">▣</span>
+
+                My Reports
+
+            </a>
+
+
+            <a href="#" class="nav-item">
+
+                <span class="nav-icon">◉</span>
+
+                Profile
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="logout-button"
+                onclick="logout()"
+            >
+
+                ↪ Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ================================
+         MAIN CONTENT
+         ================================= -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="page-header">
+
+            <div>
+
+                <p class="page-label">
+                    CIVIC ISSUE REPORTING
+                </p>
+
+                <h1>
+                    Report a Civic Issue
+                </h1>
+
+                <p class="page-description">
+                    Help improve your city by reporting a public infrastructure problem.
+                </p>
+
+            </div>
+
+
+            <div class="profile-circle" id="profileInitial">
+                C
+            </div>
+
+        </header>
+
+
+
+        <!-- ================================
+             FORM
+             ================================= -->
+
+        <section class="form-container">
+
+
+            <form id="reportForm">
+
+
+                <!-- ISSUE CATEGORY -->
+
+                <div class="form-group">
+
+                    <label for="issueCategory">
+
+                        Issue Category
+
+                        <span>*</span>
+
+                    </label>
+
+
+                    <select
+                        id="issueCategory"
+                        required
+                    >
+
+                        <option value="">
+                            Select an issue type
+                        </option>
+
+                        <option value="Pothole">
+                            Pothole
+                        </option>
+
+                        <option value="Garbage Accumulation">
+                            Garbage Accumulation
+                        </option>
+
+                        <option value="Broken Streetlight">
+                            Broken Streetlight
+                        </option>
+
+                        <option value="Water Leakage">
+                            Water Leakage
+                        </option>
+
+                        <option value="Damaged Road">
+                            Damaged Road
+                        </option>
+
+                        <option value="Overflowing Drain">
+                            Overflowing Drain
+                        </option>
+
+                        <option value="Damaged Public Property">
+                            Damaged Public Property
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="description">
+
+                        Description
+
+                        <span>*</span>
+
+                    </label>
+
+
+                    <textarea
+                        id="description"
+                        rows="6"
+                        placeholder="Describe the civic issue clearly. Mention any useful details such as the exact problem, nearby landmark, or how long it has existed."
+                        required
+                    ></textarea>
+
+
+                    <div class="character-count">
+
+                        <span id="characterCount">
+                            0
+                        </span>
+
+                        / 500 characters
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PHOTO -->
+
+                <div class="form-group">
+
+                    <label for="issuePhoto">
+
+                        Upload Photograph
+
+                        <span>*</span>
+
+                    </label>
+
+
+                    <div
+                        class="upload-area"
+                        id="uploadArea"
+                    >
+
+                        <div class="upload-icon">
+                            📷
+                        </div>
+
+
+                        <h3>
+                            Upload a photo of the issue
+                        </h3>
+
+
+                        <p>
+                            JPG, JPEG or PNG • Maximum 5MB
+                        </p>
+
+
+                        <label
+                            for="issuePhoto"
+                            class="choose-file"
+                        >
+                            Choose Photo
+                        </label>
+
+
+                        <input
+                            type="file"
+                            id="issuePhoto"
+                            accept="image/jpeg,image/png,image/jpg"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- IMAGE PREVIEW -->
+
+                    <div
+                        id="imagePreview"
+                        class="image-preview"
+                    >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LOCATION -->
+
+                <div class="form-group">
+
+                    <label for="location">
+
+                        Location
+
+                        <span>*</span>
+
+                    </label>
+
+
+                    <div class="location-row">
+
+                        <input
+                            type="text"
+                            id="location"
+                            placeholder="Enter the location of the issue"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            id="locationButton"
+                            class="location-button"
+                        >
+
+                            📍 Use My Location
+
+                        </button>
+
+                    </div>
+
+
+                    <p
+                        id="locationMessage"
+                        class="location-message"
+                    ></p>
+
+                </div>
+
+
+
+                <!-- IMPORTANT NOTE -->
+
+                <div class="notice">
+
+                    <div class="notice-icon">
+                        ✓
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Before submitting
+                        </strong>
+
+                        <p>
+                            Please make sure the information and photograph
+                            accurately describe the civic issue.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="dashboard.html"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                    >
+
+                        Submit Report
+
+                    </button>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <p
+                    id="reportMessage"
+                    class="report-message"
+                ></p>
+
+
+            </form>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
