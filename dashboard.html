@@ -2,72 +2,53 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>CivicLens - Citizen Dashboard</title>
 
     <link rel="stylesheet" href="dashboard.css">
-
 </head>
 
+<body>
 
-<body class="dashboard-body">
-
-
-    <!-- =====================================
-         SIDEBAR
-         ===================================== -->
+    <!-- ================= SIDEBAR ================= -->
 
     <aside class="sidebar">
 
-        <div class="dashboard-logo">
-            <span>●</span>
-            CivicLens
+        <div class="logo">
+            <div class="logo-circle">•</div>
+            <span>CivicLens</span>
         </div>
-
 
         <nav class="sidebar-nav">
 
-            <a href="dashboard.html" class="nav-link active">
-                <span>⌂</span>
-                Dashboard
+            <a href="dashboard.html" class="nav-item active">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
             </a>
 
-
-            <a href="report.html" class="nav-link">
-                <span>+</span>
-                Report Issue
+            <a href="report.html" class="nav-item">
+                <span class="nav-icon">＋</span>
+                <span>Report Issue</span>
             </a>
 
-
-            <a href="#" class="nav-link">
-                <span>▣</span>
-                My Reports
+            <a href="my-reports.html" class="nav-item">
+                <span class="nav-icon">▣</span>
+                <span>My Reports</span>
             </a>
 
-
-            <a href="#" class="nav-link">
-                <span>◉</span>
-                Profile
+            <a href="profile.html" class="nav-item">
+                <span class="nav-icon">◉</span>
+                <span>Profile</span>
             </a>
 
         </nav>
 
-
         <div class="sidebar-bottom">
 
-            <button
-                class="logout-btn"
-                onclick="logout()"
-            >
-                <span>↪</span>
-                Logout
+            <button class="logout-btn" id="logoutBtn">
+                ↪ <span>Logout</span>
             </button>
 
         </div>
@@ -75,68 +56,53 @@
     </aside>
 
 
+    <!-- ================= MAIN CONTENT ================= -->
 
-    <!-- =====================================
-         MAIN CONTENT
-         ===================================== -->
+    <main class="main-content">
 
-    <main class="dashboard-main">
+        <!-- HEADER -->
 
-
-        <!-- TOP BAR -->
-
-        <header class="dashboard-header">
+        <section class="dashboard-header">
 
             <div>
 
-                <p class="dashboard-small-title">
+                <p class="dashboard-label">
                     CITIZEN DASHBOARD
                 </p>
 
                 <h1>
-                    Welcome back, <span id="userName">Citizen</span>
+                    Welcome back, <span id="dashboardUserName">Citizen</span>
                 </h1>
 
-                <p class="dashboard-description">
+                <p class="subtitle">
                     Track your civic reports and help improve your community.
                 </p>
 
             </div>
 
-
-            <div class="profile-circle" id="profileInitial">
+            <div class="profile-circle" id="profileCircle">
                 C
             </div>
 
-        </header>
+        </section>
 
 
+        <!-- ================= STATISTICS ================= -->
 
-        <!-- =====================================
-             STATISTICS
-             ===================================== -->
-
-        <section class="stats-grid">
-
+        <section class="stats-container">
 
             <div class="stat-card">
 
                 <div class="stat-icon">
-                    +
+                    ＋
                 </div>
 
                 <div>
-
                     <p>Total Reports</p>
-
-                    <h2 id="totalReports">
-                        0
-                    </h2>
-
+                    <h2 id="totalReports">0</h2>
                 </div>
 
             </div>
-
 
 
             <div class="stat-card">
@@ -146,17 +112,11 @@
                 </div>
 
                 <div>
-
                     <p>Under Review</p>
-
-                    <h2 id="reviewReports">
-                        0
-                    </h2>
-
+                    <h2 id="underReview">0</h2>
                 </div>
 
             </div>
-
 
 
             <div class="stat-card">
@@ -166,17 +126,11 @@
                 </div>
 
                 <div>
-
                     <p>In Progress</p>
-
-                    <h2 id="progressReports">
-                        0
-                    </h2>
-
+                    <h2 id="inProgress">0</h2>
                 </div>
 
             </div>
-
 
 
             <div class="stat-card">
@@ -186,13 +140,8 @@
                 </div>
 
                 <div>
-
                     <p>Resolved</p>
-
-                    <h2 id="resolvedReports">
-                        0
-                    </h2>
-
+                    <h2 id="resolved">0</h2>
                 </div>
 
             </div>
@@ -200,38 +149,31 @@
         </section>
 
 
+        <!-- ================= QUICK ACTIONS ================= -->
 
-        <!-- =====================================
-             QUICK ACTIONS
-             ===================================== -->
-
-        <section class="dashboard-section">
+        <section class="section">
 
             <div class="section-heading">
 
                 <div>
-
                     <h2>Quick Actions</h2>
-
-                    <p>
-                        What would you like to do?
-                    </p>
-
+                    <p>What would you like to do?</p>
                 </div>
 
             </div>
 
 
-            <div class="action-grid">
+            <div class="quick-actions">
 
+                <!-- REPORT ISSUE -->
 
-                <a href="#" class="action-card">
+                <a href="report.html" class="action-card">
 
                     <div class="action-icon">
-                        +
+                        ＋
                     </div>
 
-                    <div>
+                    <div class="action-content">
 
                         <h3>Report a Civic Issue</h3>
 
@@ -249,14 +191,15 @@
                 </a>
 
 
+                <!-- VIEW REPORTS -->
 
-                <a href="#" class="action-card">
+                <a href="my-reports.html" class="action-card">
 
                     <div class="action-icon">
                         ▣
                     </div>
 
-                    <div>
+                    <div class="action-content">
 
                         <h3>View My Reports</h3>
 
@@ -277,15 +220,11 @@
         </section>
 
 
+        <!-- ================= RECENT REPORTS ================= -->
 
-        <!-- =====================================
-             RECENT REPORTS
-             ===================================== -->
+        <section class="section">
 
-        <section class="dashboard-section">
-
-
-            <div class="section-heading">
+            <div class="section-heading reports-heading">
 
                 <div>
 
@@ -297,70 +236,22 @@
 
                 </div>
 
-
-                <a href="#" class="view-all">
+                <a href="my-reports.html" class="view-all">
                     View all
                 </a>
 
             </div>
 
 
+            <div id="recentReports" class="recent-reports">
 
-            <div class="reports-card">
-
-                <div class="empty-reports">
-
-                    <div class="empty-icon">
-                        ▣
-                    </div>
-
-                    <h3>No reports yet</h3>
-
-                    <p>
-                        You haven't reported any civic issues.
-                        Start by submitting your first report.
-                    </p>
-
-                    <button class="report-button">
-                        + Report an Issue
-                    </button>
-
-                </div>
+                <!-- JavaScript will load reports here -->
 
             </div>
 
         </section>
-
-
-
-        <!-- =====================================
-             INFORMATION
-             ===================================== -->
-
-        <section class="info-banner">
-
-            <div class="info-symbol">
-                ✓
-            </div>
-
-            <div>
-
-                <h3>
-                    Together, we can improve our city.
-                </h3>
-
-                <p>
-                    Your reports help identify civic problems
-                    and make our communities better.
-                </p>
-
-            </div>
-
-        </section>
-
 
     </main>
-
 
 
     <script src="script.js"></script>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CivicLens - My Reports</title>
+
+    <link rel="stylesheet"
+          href="dashboard.css">
+
+    <style>
+
+        .reports-page {
+            max-width: 1100px;
+        }
+
+        .page-title {
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #71817c;
+            font-size: 14px;
+        }
+
+        .reports-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .full-report-card {
+            background: white;
+            border: 1px solid #e2e8e5;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .report-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 18px;
+        }
+
+        .report-id {
+            color: #08765b;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .report-title {
+            font-size: 20px;
+            color: #152d28;
+            margin-bottom: 7px;
+        }
+
+        .report-description {
+            color: #6d7d78;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .report-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            padding: 15px 0;
+            border-top: 1px solid #edf1ef;
+            border-bottom: 1px solid #edf1ef;
+            margin-bottom: 22px;
+        }
+
+        .meta-item {
+            color: #667771;
+            font-size: 13px;
+        }
+
+        .meta-item strong {
+            color: #233c35;
+        }
+
+        .status-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* STATUS TIMELINE */
+
+        .status-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .status-timeline::before {
+            content: "";
+            position: absolute;
+
+            top: 16px;
+            left: 8%;
+            right: 8%;
+
+            height: 2px;
+
+            background: #dfe8e4;
+        }
+
+        .timeline-step {
+            position: relative;
+            z-index: 2;
+
+            text-align: center;
+        }
+
+        .timeline-dot {
+            width: 32px;
+            height: 32px;
+
+            margin: 0 auto 9px;
+
+            border-radius: 50%;
+
+            background: #edf1ef;
+
+            border: 4px solid white;
+
+            color: #84908c;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .timeline-step.completed .timeline-dot,
+        .timeline-step.current .timeline-dot {
+            background: #14765b;
+            color: white;
+        }
+
+        .timeline-step.current .timeline-dot {
+            box-shadow: 0 0 0 4px #dceee7;
+        }
+
+        .timeline-label {
+            font-size: 12px;
+            color: #8a9793;
+        }
+
+        .timeline-step.completed .timeline-label,
+        .timeline-step.current .timeline-label {
+            color: #14765b;
+            font-weight: bold;
+        }
+
+        .empty-my-reports {
+            background: white;
+            border: 1px solid #e2e8e5;
+            border-radius: 12px;
+            min-height: 300px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+        }
+
+        .empty-my-reports h2 {
+            margin-bottom: 8px;
+        }
+
+        .empty-my-reports p {
+            color: #71817c;
+            margin-bottom: 20px;
+        }
+
+        .new-report-btn {
+            background: #14765b;
+            color: white;
+            text-decoration: none;
+
+            padding: 12px 20px;
+            border-radius: 6px;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        @media(max-width: 700px) {
+
+            .status-timeline {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .status-timeline::before {
+                display: none;
+            }
+
+            .timeline-step {
+                display: flex;
+                align-items: center;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                margin: 0 12px 0 0;
+            }
+
+            .report-top {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-circle">•</div>
+            <span>CivicLens</span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html"
+               class="nav-item">
+
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+
+            </a>
+
+            <a href="report.html"
+               class="nav-item">
+
+                <span class="nav-icon">＋</span>
+                <span>Report Issue</span>
+
+            </a>
+
+            <a href="my-reports.html"
+               class="nav-item active">
+
+                <span class="nav-icon">▣</span>
+                <span>My Reports</span>
+
+            </a>
+
+            <a href="profile.html"
+               class="nav-item">
+
+                <span class="nav-icon">◉</span>
+                <span>Profile</span>
+
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button class="logout-btn"
+                    id="logoutBtn">
+
+                ↪ Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <div class="reports-page">
+
+            <div class="page-title">
+
+                <p class="dashboard-label">
+                    REPORT MANAGEMENT
+                </p>
+
+                <h1>My Reports</h1>
+
+                <p>
+                    Track all civic issues you have reported
+                    and monitor their progress.
+                </p>
+
+            </div>
+
+
+            <div id="myReportsContainer"
+                 class="reports-list">
+
+                <!-- JavaScript loads reports -->
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

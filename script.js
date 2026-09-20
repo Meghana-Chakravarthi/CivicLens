@@ -677,87 +677,523 @@ if (window.location.pathname.includes("report.html")) {
 
 
 // =========================================
-// CIVICLENS - UPDATE DASHBOARD STATISTICS
+// CIVICLENS - DASHBOARD
 // =========================================
 
 if (window.location.pathname.includes("dashboard.html")) {
-
-    // Get reports saved in localStorage
 
     const reports =
         JSON.parse(
             localStorage.getItem("civicLensReports")
         ) || [];
 
+    // -------------------------------
+    // USER INFORMATION
+    // -------------------------------
 
-    // Calculate report counts
+    const storedUser =
+        localStorage.getItem("civicLensUser");
+
+    if (storedUser) {
+
+        const user =
+            JSON.parse(storedUser);
+
+        const nameElement =
+            document.getElementById("dashboardUserName");
+
+        const profileCircle =
+            document.getElementById("profileCircle");
+
+        if (nameElement && user.name) {
+            nameElement.textContent =
+                user.name;
+        }
+
+        if (profileCircle && user.name) {
+            profileCircle.textContent =
+                user.name.charAt(0).toUpperCase();
+
+            profileCircle.onclick =
+                function () {
+                    window.location.href =
+                        "profile.html";
+                };
+        }
+    }
+
+
+    // -------------------------------
+    // DASHBOARD STATISTICS
+    // -------------------------------
 
     const totalReports =
         reports.length;
 
-
     const underReview =
         reports.filter(
-            report => report.status === "Under Review"
+            report =>
+                report.status === "Under Review"
         ).length;
-
 
     const inProgress =
         reports.filter(
-            report => report.status === "In Progress"
+            report =>
+                report.status === "In Progress"
         ).length;
-
 
     const resolved =
         reports.filter(
-            report => report.status === "Resolved"
+            report =>
+                report.status === "Resolved"
         ).length;
 
 
-    // Display numbers
+    document.getElementById(
+        "totalReports"
+    ).textContent = totalReports;
 
-    const totalElement =
-        document.getElementById("totalReports");
+    document.getElementById(
+        "underReview"
+    ).textContent = underReview;
 
-    const reviewElement =
-        document.getElementById("underReview");
+    document.getElementById(
+        "inProgress"
+    ).textContent = inProgress;
 
-    const progressElement =
-        document.getElementById("inProgress");
-
-    const resolvedElement =
-        document.getElementById("resolved");
+    document.getElementById(
+        "resolved"
+    ).textContent = resolved;
 
 
-    if (totalElement) {
+    // -------------------------------
+    // RECENT REPORTS
+    // -------------------------------
 
-        totalElement.textContent =
-            totalReports;
+    const recentReports =
+        document.getElementById(
+            "recentReports"
+        );
 
+    if (reports.length === 0) {
+
+        recentReports.innerHTML = `
+
+            <div class="empty-reports">
+
+                <div class="empty-icon">
+                    ▣
+                </div>
+
+                <h3>
+                    No reports yet
+                </h3>
+
+                <p>
+                    You haven't reported any civic issues.
+                    Start by submitting your first report.
+                </p>
+
+                <a
+                    href="report.html"
+                    class="report-button"
+                >
+                    + Report an Issue
+                </a>
+
+            </div>
+
+        `;
+
+    } else {
+
+        // Show latest 3 reports
+        const latestReports =
+            reports.slice(-3).reverse();
+
+        recentReports.innerHTML =
+            latestReports.map(
+                report => {
+
+                    const statusClass =
+                        getStatusClass(
+                            report.status
+                        );
+
+                    return `
+
+                        <div class="recent-report">
+
+                            <div class="report-info">
+
+                                <h3>
+                                    ${report.category}
+                                </h3>
+
+                                <p>
+                                    ${report.description}
+                                </p>
+
+                                <div class="report-date">
+                                    Report ID:
+                                    ${report.id}
+                                    &nbsp; • &nbsp;
+                                    ${report.date}
+                                </div>
+
+                            </div>
+
+                            <span class="status-badge ${statusClass}">
+                                ${report.status}
+                            </span>
+
+                        </div>
+
+                    `;
+                }
+            ).join("");
     }
-
-
-    if (reviewElement) {
-
-        reviewElement.textContent =
-            underReview;
-
-    }
-
-
-    if (progressElement) {
-
-        progressElement.textContent =
-            inProgress;
-
-    }
-
-
-    if (resolvedElement) {
-
-        resolvedElement.textContent =
-            resolved;
-
-    }
-
 }
+
+
+// =========================================
+// CIVICLENS - STATUS CLASS
+// =========================================
+
+function getStatusClass(status) {
+
+    if (status === "Under Review") {
+        return "status-review";
+    }
+
+    if (status === "In Progress") {
+        return "status-progress";
+    }
+
+    if (status === "Resolved") {
+        return "status-resolved";
+    }
+
+    return "status-reported";
+}
+
+
+// =========================================
+// CIVICLENS - MY REPORTS
+// =========================================
+
+if (
+    window.location.pathname.includes(
+        "my-reports.html"
+    )
+) {
+
+    const container =
+        document.getElementById(
+            "myReportsContainer"
+        );
+
+    const reports =
+        JSON.parse(
+            localStorage.getItem(
+                "civicLensReports"
+            )
+        ) || [];
+
+
+    if (reports.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-my-reports">
+
+                <h2>
+                    No Reports Found
+                </h2>
+
+                <p>
+                    You have not submitted any civic issues yet.
+                </p>
+
+                <a
+                    href="report.html"
+                    class="new-report-btn"
+                >
+                    + Report an Issue
+                </a>
+
+            </div>
+
+        `;
+
+    } else {
+
+        container.innerHTML =
+            reports
+            .slice()
+            .reverse()
+            .map(
+                report => {
+
+                    return createReportCard(
+                        report
+                    );
+
+                }
+            )
+            .join("");
+    }
+}
+
+
+// =========================================
+// CREATE REPORT CARD
+// =========================================
+
+function createReportCard(report) {
+
+    const status =
+        report.status || "Reported";
+
+
+    const statusOrder = [
+        "Reported",
+        "Under Review",
+        "In Progress",
+        "Resolved"
+    ];
+
+
+    const currentIndex =
+        statusOrder.indexOf(status);
+
+
+    const steps =
+        statusOrder.map(
+            (step, index) => {
+
+                let className = "";
+
+                if (index < currentIndex) {
+                    className = "completed";
+                }
+
+                if (index === currentIndex) {
+                    className = "current";
+                }
+
+                return `
+
+                    <div class="timeline-step ${className}">
+
+                        <div class="timeline-dot">
+
+                            ${
+                                index < currentIndex
+                                ? "✓"
+                                : index + 1
+                            }
+
+                        </div>
+
+                        <div class="timeline-label">
+                            ${step}
+                        </div>
+
+                    </div>
+
+                `;
+            }
+        ).join("");
+
+
+    return `
+
+        <div class="full-report-card">
+
+            <div class="report-top">
+
+                <div>
+
+                    <div class="report-id">
+                        REPORT ID: ${report.id}
+                    </div>
+
+                    <h2 class="report-title">
+                        ${report.category}
+                    </h2>
+
+                    <p class="report-description">
+                        ${report.description}
+                    </p>
+
+                </div>
+
+                <span
+                    class="status-badge
+                    ${getStatusClass(status)}"
+                >
+                    ${status}
+                </span>
+
+            </div>
+
+
+            <div class="report-meta">
+
+                <div class="meta-item">
+                    <strong>Submitted:</strong>
+                    ${report.date}
+                </div>
+
+                <div class="meta-item">
+                    <strong>Location:</strong>
+                    ${report.location || "Not provided"}
+                </div>
+
+            </div>
+
+
+            <div class="status-title">
+                Issue Status
+            </div>
+
+
+            <div class="status-timeline">
+
+                ${steps}
+
+            </div>
+
+        </div>
+
+    `;
+}
+
+
+// =========================================
+// CIVICLENS - PROFILE
+// =========================================
+
+if (
+    window.location.pathname.includes(
+        "profile.html"
+    )
+) {
+
+    const storedUser =
+        localStorage.getItem(
+            "civicLensUser"
+        );
+
+
+    const reports =
+        JSON.parse(
+            localStorage.getItem(
+                "civicLensReports"
+            )
+        ) || [];
+
+
+    if (storedUser) {
+
+        const user =
+            JSON.parse(storedUser);
+
+
+        const profileName =
+            document.getElementById(
+                "profileName"
+            );
+
+        const profileFullName =
+            document.getElementById(
+                "profileFullName"
+            );
+
+        const profileContact =
+            document.getElementById(
+                "profileContact"
+            );
+
+        const profileInitial =
+            document.getElementById(
+                "largeProfileInitial"
+            );
+
+        const profileReportCount =
+            document.getElementById(
+                "profileReportCount"
+            );
+
+
+        if (profileName) {
+            profileName.textContent =
+                user.name;
+        }
+
+        if (profileFullName) {
+            profileFullName.textContent =
+                user.name;
+        }
+
+        if (profileContact) {
+            profileContact.textContent =
+                user.contact;
+        }
+
+        if (profileInitial) {
+            profileInitial.textContent =
+                user.name
+                    .charAt(0)
+                    .toUpperCase();
+        }
+
+        if (profileReportCount) {
+            profileReportCount.textContent =
+                reports.length;
+        }
+    }
+}
+
+
+// =========================================
+// CIVICLENS - LOGOUT
+// =========================================
+
+const logoutBtn =
+    document.getElementById(
+        "logoutBtn"
+    );
+
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener(
+        "click",
+        function () {
+
+            const confirmLogout =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
+
+
+            if (confirmLogout) {
+
+                localStorage.removeItem(
+                    "civicLensLoggedIn"
+                );
+
+                localStorage.removeItem(
+                    "civicLensUserName"
+                );
+
+                window.location.href =
+                    "login.html";
+            }
+
+        }
+    );
+}
+
